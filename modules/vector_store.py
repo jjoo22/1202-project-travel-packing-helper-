@@ -82,5 +82,8 @@ class VectorStoreManager:
             else:
                 return None
         
-        # 검색 개수 제한 (k=3) - 토큰 절약
-        return self.vector_store.as_retriever(search_kwargs={"k": 3})
+    
+        return self.vector_store.as_retriever(
+            search_type="mmr", 
+            search_kwargs={"k": 3, "fetch_k": 10}
+        )
